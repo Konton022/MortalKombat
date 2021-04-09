@@ -24,14 +24,14 @@ function createPlayer(playerNum, playerObj) {
     $player.classList.add(playerNum);
 
     const $progressbar = document.createElement('div');
-    $progressbar.classList.add('proressbar');
+    $progressbar.classList.add('progressbar');
 
     const $character = document.createElement('div');
     $character.classList.add('character');
 
     const $life = document.createElement('div');
     $life.classList.add('life');
-    // $life.style.width = '100%';
+    $life.style.width = '100%';
     $life.innerText = playerObj.hp;
 
     const $name = document.createElement('div');
