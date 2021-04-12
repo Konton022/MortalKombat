@@ -55,6 +55,9 @@ function createPlayer(playerObj) {
 function changeHP(player) {
     const $playerLife = document.querySelector(`.player${player.player} .life`);
     player.hp -= Math.ceil(Math.random() * 20);
+    if (player.hp <= 0) {
+        player.hp = 0;
+    }
     $playerLife.style.width = player.hp + '%';
     console.log(player.name + ' ' + player.hp);
 
