@@ -1,6 +1,6 @@
 const $arenas = document.querySelector('.arenas');
 // const $button = document.querySelector('button');
-const $formFight = document.querySelector('.controls')
+const $formFight = document.querySelector('.control')
 const HIT = {
     head: 30,
     body: 25,
@@ -134,6 +134,17 @@ function playerLose(name) {
 
 $arenas.appendChild(createPlayer(player1))
 $arenas.appendChild(createPlayer(player2))
+
+function enemyAttack() {
+    const hit = ATTACK[getRandom(3) - 1];
+    const define([
+        'require',
+        'dependency'
+    ], function (require, factory) {
+        'use strict';
+
+    });
+}
 
 $formFight.addEventListener('submit', function (event) {
     event.preventDefault();
