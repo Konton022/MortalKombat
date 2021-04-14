@@ -1,7 +1,14 @@
 const $arenas = document.querySelector('.arenas');
-const $button = document.querySelector('button');
+// const $button = document.querySelector('button');
+const $formFight = document.querySelector('.controls')
+const HIT = {
+    head: 30,
+    body: 25,
+    foot: 20
+};
+const ATTACK = ['head', 'body', 'foot'];
 
-const Player1 = {
+const player1 = {
     player: 1,
     name: 'Scorpion',
     hp: 100,
@@ -10,24 +17,22 @@ const Player1 = {
     attack: function () {
         console.log(this.name + ' Fight...');
     },
-    changeLife: changeHP,
-    elhp: elHP,
-    renderhp: renderHP
-
+    changeHP,
+    elHP,
+    renderHP
 }
-
-const Player2 = {
+const player2 = {
     player: 2,
     name: 'Sub-zero',
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
-    weapon: ['gun'],
+    weapon: ['ice sword'],
     attack: function () {
         console.log(this.name + ' Fight...');
     },
-    changeLife: changeHP,
-    elhp: elHP,
-    renderhp: renderHP
+    changeHP,
+    elHP,
+    renderHP
 
 }
 function createElem(tag, className) {
@@ -37,7 +42,6 @@ function createElem(tag, className) {
     }
     return $tag;
 }
-
 function createPlayer(playerObj) {
     const $player = createElem('div', 'player' + playerObj.player);
     const $progressbar = createElem('div', 'progressbar');
@@ -60,6 +64,14 @@ function createPlayer(playerObj) {
 }
 function getRandom(numb) {
     return Math.ceil(Math.random() * numb)
+}
+function createRealoadButton() {
+    const $reloadButtonDiv = createElem('div', 'reloadWrap');
+    const $reloadButton = createElem('button', 'button');
+    $reloadButton.innerText = 'Reload';
+    $reloadButton.addEventListener('click', function () {
+        window.location.reload();
+    })
 }
 // передаем случайное число урона и возвращаем остаток количества жизней игрока или ноль если ушли в минус 
 function changeHP(randomVar) {
@@ -98,28 +110,35 @@ function playerLose(name) {
 
 }
 
-$button.addEventListener('click', function () {
-    console.log('CLICK!!!');
-    Player1.changeLife(getRandom(20));
-    Player2.changeLife(getRandom(20));
-    Player1.renderhp(Player1.elhp());
-    Player2.renderhp(Player2.elhp());
+// $button.addEventListener('click', function () {
+//     console.log('CLICK!!!');
+//     player1.changeHP(getRandom(20));
+//     player2.changeHP(getRandom(20));
+//     player1.renderHP(player1.elHP());
+//     player2.renderHP(player2.elHP());
 
 
-    if (Player1.hp === 0 || Player2.hp === 0) {
-        $button.disabled = true;
-    }
-    if (Player1.hp === 0 && Player1.hp < Player2.hp) {
-        $arenas.appendChild(playerWins(Player2.name))
-    } else if (Player2.hp === 0 && Player2.hp < Player1.hp) {
-        $arenas.appendChild(playerWins(Player1.name))
-    } else if (Player1.hp === 0 && Player2.hp === 0) {
-        $arenas.appendChild(playerWins())
-    }
+//     if (player1.hp === 0 || player2.hp === 0) {
+//         $button.disabled = true;
+//         createRealoadButton();
+//     }
+//     if (player1.hp === 0 && player1.hp < player2.hp) {
+//         $arenas.appendChild(playerWins(player2.name))
+//     } else if (player2.hp === 0 && player2.hp < player1.hp) {
+//         $arenas.appendChild(playerWins(player1.name))
+//     } else if (player1.hp === 0 && player2.hp === 0) {
+//         $arenas.appendChild(playerWins())
+//     }
+
+// })
+
+$arenas.appendChild(createPlayer(player1))
+$arenas.appendChild(createPlayer(player2))
+
+$formFight.addEventListener('submit', function (event) {
+    event.preventDefault();
+    console.dir($formFight);
 
 })
-
-$arenas.appendChild(createPlayer(Player1))
-$arenas.appendChild(createPlayer(Player2))
 
 
