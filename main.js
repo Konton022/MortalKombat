@@ -1,5 +1,5 @@
 const $arenas = document.querySelector('.arenas');
-// const $button = document.querySelector('button');
+const $button = document.querySelector('button');
 const $formFight = document.querySelector('.control')
 const HIT = {
     head: 30,
@@ -72,6 +72,9 @@ function createRealoadButton() {
     $reloadButton.addEventListener('click', function () {
         window.location.reload();
     })
+    $reloadButtonDiv.appendChild($reloadButton);
+    $arenas.appendChild($reloadButtonDiv);
+
 }
 // передаем случайное число урона и возвращаем остаток количества жизней игрока или ноль если ушли в минус 
 function changeHP(randomVar) {
@@ -137,19 +140,59 @@ $arenas.appendChild(createPlayer(player2))
 
 function enemyAttack() {
     const hit = ATTACK[getRandom(3) - 1];
-    const define([
-        'require',
-        'dependency'
-    ], function (require, factory) {
-        'use strict';
+    const defence = ATTACK[getRandom(3) - 1];
+    console.log('####: hit', hit);
+    console.log('####: defence', defence);
 
-    });
+    return {
+        value: getRandom(HIT[hit]),
+        hit,
+        defence,
+    }
+}
+
+function compareHits(player, attack, enemy) {
+    if (attack.hit != enemy.defence) {
+        player.changeHP(attack.value);
+        player.renderHP(player.elHP())
+    }
 }
 
 $formFight.addEventListener('submit', function (event) {
     event.preventDefault();
-    console.dir($formFight);
+    // console.dir($formFight);
+    const enemy = enemyAttack();
+    console.log('##### enemy:  ', enemy);
 
+    const attack = {};
+    for (let item of $formFight) {
+        if (item.checked && item.name === 'hit') {
+            attack.value = getRandom (HIT[item.value]);
+            attack.hit = item.value;
+        }
+        if (item.checked && item.name === 'defence') {
+            attack.defence = item.value;
+        }
+        item.checked = false;
+    }
+    console.log ('##### a', attack);
+    console.log ('##### e', enemy );
+    compareHits(player2, attack, enemy);
+    compareHits(player1, enemy, attack);
+
+    if (player1.hp === 0 || player2.hp === 0) {
+                 $button.disabled = true;
+                 createRealoadButton();
+             }
+             if (player1.hp === 0 && player1.hp < player2.hp) {
+                 $arenas.appendChild(playerWins(player2.name))
+             } else if (player2.hp === 0 && player2.hp < player1.hp) {
+                 $arenas.appendChild(playerWins(player1.name))
+             } else if (player1.hp === 0 && player2.hp === 0) {
+                 $arenas.appendChild(playerWins())
+             }
 })
+
+
 
 
