@@ -218,7 +218,7 @@ function generateLogs(type, player1, player2, attackObj) {
             logString = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} - ${logs.defence[getRandom(logs.defence.length - 1)].replace('[playerDefence]', player1.name).replace('[playerKick]', player2.name)}`;
             break;
         default:
-            logString = `Ну на часах ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}, а у нас что-то пошло не так!!`;
+            logString = `Ну а на часах ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}, а у нас что-то пошло не так!!`;
             break
     }
     $chat.insertAdjacentHTML('afterbegin', `<p>${logString}</p>`);
