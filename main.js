@@ -1,3 +1,5 @@
+import { player1, player2 } from './players.js';
+import { createElem, createPlayer, getRandom } from './utils.js'
 const $arenas = document.querySelector('.arenas');
 const $button = document.querySelector('button');
 const $formFight = document.querySelector('.control')
@@ -49,64 +51,36 @@ const logs = {
     draw: 'Ничья - это тоже победа!'
 };
 
+// function createElem(tag, className) {
+//     const $tag = document.createElement(tag);
+//     if (className) {
+//         $tag.classList.add(className);
+//     }
+//     return $tag;
+// }
+// function createPlayer(playerObj) {
+//     const $player = createElem('div', 'player' + playerObj.player);
+//     const $progressbar = createElem('div', 'progressbar');
+//     const $character = createElem('div', 'character');
+//     const $life = createElem('div', 'life');
+//     const $name = createElem('div', 'name');
+//     const $img = createElem('img');
 
-const player1 = {
-    player: 1,
-    name: 'Scorpion',
-    hp: 100,
-    img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
-    weapon: ['knife'],
-    attack: function () {
-        console.log(this.name + ' Fight...');
-    },
-    changeHP,
-    elHP,
-    renderHP
-}
-const player2 = {
-    player: 2,
-    name: 'Sub-zero',
-    hp: 100,
-    img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
-    weapon: ['ice sword'],
-    attack: function () {
-        console.log(this.name + ' Fight...');
-    },
-    changeHP,
-    elHP,
-    renderHP
+//     $life.style.width = playerObj.hp + '%';
+//     $img.src = playerObj.img;
+//     $name.innerText = playerObj.name;
 
-}
-function createElem(tag, className) {
-    const $tag = document.createElement(tag);
-    if (className) {
-        $tag.classList.add(className);
-    }
-    return $tag;
-}
-function createPlayer(playerObj) {
-    const $player = createElem('div', 'player' + playerObj.player);
-    const $progressbar = createElem('div', 'progressbar');
-    const $character = createElem('div', 'character');
-    const $life = createElem('div', 'life');
-    const $name = createElem('div', 'name');
-    const $img = createElem('img');
+//     $player.appendChild($progressbar);
+//     $player.appendChild($character);
+//     $progressbar.appendChild($life);
+//     $progressbar.appendChild($name);
+//     $character.appendChild($img);
 
-    $life.style.width = playerObj.hp + '%';
-    $img.src = playerObj.img;
-    $name.innerText = playerObj.name;
-
-    $player.appendChild($progressbar);
-    $player.appendChild($character);
-    $progressbar.appendChild($life);
-    $progressbar.appendChild($name);
-    $character.appendChild($img);
-
-    return $player;
-}
-function getRandom(numb) {
-    return Math.ceil(Math.random() * numb)
-}
+//     return $player;
+// }
+// function getRandom(numb) {
+//     return Math.ceil(Math.random() * numb)
+// }
 function createRealoadButton() {
     const $reloadButtonDiv = createElem('div', 'reloadWrap');
     const $reloadButton = createElem('button', 'button');
@@ -117,23 +91,6 @@ function createRealoadButton() {
     $reloadButtonDiv.appendChild($reloadButton);
     $arenas.appendChild($reloadButtonDiv);
 
-}
-// передаем случайное число урона и возвращаем остаток количества жизней игрока или ноль если ушли в минус 
-function changeHP(randomVar) {
-    this.hp -= randomVar;
-    if (this.hp <= 0) {
-        this.hp = 0;
-    }
-    console.log(this.name + ' ' + this.hp);
-    return this.hp;
-}
-//возвращаем <div> <class ='.player1-2 .live' </div> 
-function elHP() {
-    return document.querySelector(`.player${this.player} .life`)
-}
-//рисуем уровень жизней в текущий <div>
-function renderHP(getDiv) {
-    return getDiv.style.width = `${this.hp}%`;
 }
 
 function playerWins(name) {
