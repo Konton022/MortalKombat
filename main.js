@@ -1,12 +1,19 @@
 import { player1, player2 } from './players.js';
 import { createElem, createPlayer, getRandom } from './utils.js';
+import Game from './game.js';
+
 const $arenas = document.querySelector('.arenas');
 const $button = document.querySelector('button');
 const $formFight = document.querySelector('.control')
 const $chat = document.querySelector('.chat');
+const game = new Game({
+    player1: player1,
+    player2: player2
+});
 
-const { name: namePlayer1, hp: hpPlayer1 } = player1;
-const { name: namePlayer2, hp: hpPlayer2 } = player2;
+console.log(game);
+// const { name: namePlayer1, hp: hpPlayer1 } = player1;
+// const { name: namePlayer2, hp: hpPlayer2 } = player2;
 
 const HIT = {
     head: 30,
@@ -175,7 +182,7 @@ function winPlayer(player1, player2) {
         console.log(generateLogs('draw'));
     }
 }
-console.log(generateLogs('start', player1, player2));
+generateLogs('start', player1, player2);
 
 $formFight.addEventListener('submit', function (event) {
     event.preventDefault();
