@@ -28,4 +28,21 @@ const createPlayer = (playerObj) => {
 
 const getRandom = (numb) => Math.ceil(Math.random() * numb);
 
-export { createElem, createPlayer, getRandom };
+const getTime = () => {
+
+    const date = new Date()
+
+    function getTen(time) {
+        if (time < 10) { return (`0${time}`) }
+        else { return (`${time}`) }
+    }
+    let curHours = getTen(date.getHours());
+    let curMin = getTen(date.getMinutes());
+    let curSec = getTen(date.getSeconds());
+
+    let currentTime = `${curHours}:${curMin}:${curSec}`;
+    return currentTime;
+}
+
+
+export { createElem, createPlayer, getRandom, getTime };

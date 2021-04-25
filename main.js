@@ -1,4 +1,4 @@
-import { player1, player2 } from './players.js';
+import { player1, player2 } from './Player/index.js';
 // import { createElem, createPlayer, getRandom } from './utils.js';
 import { $arenas, $button, $formFight, $chat } from './init.js';
 import Game from './game.js';

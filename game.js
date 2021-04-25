@@ -1,7 +1,8 @@
-import { player1, player2 } from './players.js';
-import { createElem, createPlayer, getRandom } from './utils.js';
+import { player1, player2 } from './Player/index.js';
+import { createElem, createPlayer, getRandom, getTime } from './Utils/index.js';
 import { $arenas, $button, $formFight, $chat, HIT, ATTACK, logs } from './init.js';
 
+console.log('####currentTime is', getTime());
 
 class Game {
     start() {
@@ -23,27 +24,35 @@ class Game {
 
     }
     generateLogs(type, player1, player2, attackObj) {
-        const date = new Date();
+        // const date = new Date();
         // let currentTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         let logString = '';
         switch (type) {
             case 'start':
-                logString = logs.start.replace('[time]', `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`).replace('[player1]', player1.name).replace('[player2]', player2.name)
+                logString = logs.start.replace('[time]', `${getTime()}`)
+                    .replace('[player1]', player1.name)
+                    .replace('[player2]', player2.name);
                 break;
             case 'end':
-                logString = logs.end[getRandom(logs.end.length - 1)].replace('[playerWins]', player1.name).replace('[playerLose]', player2.name);
+                logString = logs.end[getRandom(logs.end.length - 1)]
+                    .replace('[playerWins]', player1.name)
+                    .replace('[playerLose]', player2.name);
                 break;
             case 'draw':
                 logString = logs.draw;
                 break;
             case 'hit':
-                logString = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} - ${logs.hit[getRandom(logs.hit.length - 1)].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name)} - ${attackObj.value} [${player2.hp}/100]`;
+                logString = `${getTime()} - ${logs.hit[getRandom(logs.hit.length - 1)]
+                    .replace('[playerKick]', player1.name)
+                    .replace('[playerDefence]', player2.name)} - ${attackObj.value} [${player2.hp}/100]`;
                 break;
             case 'defence':
-                logString = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} - ${logs.defence[getRandom(logs.defence.length - 1)].replace('[playerDefence]', player1.name).replace('[playerKick]', player2.name)}`;
+                logString = `${gettime()} - ${logs.defence[getRandom(logs.defence.length - 1)]
+                    .replace('[playerDefence]', player1.name)
+                    .replace('[playerKick]', player2.name)}`;
                 break;
             default:
-                logString = `Ну а на часах ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}, а у нас что-то пошло не так!!`;
+                logString = `Ну а на часах ${getTime()}, а у нас что-то пошло не так!!`;
                 break
         }
         $chat.insertAdjacentHTML('afterbegin', `<p>${logString}</p>`);

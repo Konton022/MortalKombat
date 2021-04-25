@@ -5,6 +5,7 @@ class Player {
         this.hp = props.hp;
         this.img = props.img;
         this.weapon = [props.weapon];
+        this.selector = `player${this.player}`;
     }
     attack = () => console.log(`${this.name} fight.....`);
     changeHP = (randomVar) => {
