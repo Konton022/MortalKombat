@@ -1,8 +1,8 @@
-import { player1, player2 } from './Player/index.js';
-import { createElem, createPlayer, getRandom, getTime } from './Utils/index.js';
+import { player1, player2 } from '../Player/index.js';
+import { createElem, createPlayer, getRandom, getTime1 } from './Utils/index.js';
 import { $arenas, $button, $formFight, $chat, HIT, ATTACK, logs } from './init.js';
 
-console.log('####currentTime is', getTime());
+console.log('####currentTime is', getTime1());
 
 class Game {
     start() {
@@ -24,12 +24,10 @@ class Game {
 
     }
     generateLogs(type, player1, player2, attackObj) {
-        // const date = new Date();
-        // let currentTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         let logString = '';
         switch (type) {
             case 'start':
-                logString = logs.start.replace('[time]', `${getTime()}`)
+                logString = logs.start.replace('[time]', `${getTime1()}`)
                     .replace('[player1]', player1.name)
                     .replace('[player2]', player2.name);
                 break;
@@ -42,17 +40,17 @@ class Game {
                 logString = logs.draw;
                 break;
             case 'hit':
-                logString = `${getTime()} - ${logs.hit[getRandom(logs.hit.length - 1)]
+                logString = `${getTime1()} - ${logs.hit[getRandom(logs.hit.length - 1)]
                     .replace('[playerKick]', player1.name)
                     .replace('[playerDefence]', player2.name)} - ${attackObj.value} [${player2.hp}/100]`;
                 break;
             case 'defence':
-                logString = `${gettime()} - ${logs.defence[getRandom(logs.defence.length - 1)]
+                logString = `${getTime1()} - ${logs.defence[getRandom(logs.defence.length - 1)]
                     .replace('[playerDefence]', player1.name)
                     .replace('[playerKick]', player2.name)}`;
                 break;
             default:
-                logString = `Ну а на часах ${getTime()}, а у нас что-то пошло не так!!`;
+                logString = `Ну а на часах ${getTime1()}, а у нас что-то пошло не так!!`;
                 break
         }
         $chat.insertAdjacentHTML('afterbegin', `<p>${logString}</p>`);
