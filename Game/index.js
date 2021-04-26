@@ -1,5 +1,5 @@
-import { createElem, createPlayer, getRandom, getTime } from '../Utils/index.js';
-import { HIT, ATTACK, logs } from '../init.js';
+import { createElem, getRandom, getTime } from '../utils/index.js';
+import { HIT, ATTACK, logs } from '../constants/index.js';
 
 class Game {
     constructor(props) {
@@ -11,8 +11,10 @@ class Game {
         this.chat = props.chat;
     }
     start() {
-        this.location.appendChild(createPlayer(this.player1))
-        this.location.appendChild(createPlayer(this.player2))
+        this.player1.createPlayer();
+        this.player2.createPlayer();
+        // this.location.appendChild(createPlayer(this.player1))
+        // this.location.appendChild(createPlayer(this.player2))
         this.generateLogs('start', this.player1, this.player2);
 
 
@@ -91,8 +93,8 @@ class Game {
     enemyAttack() {
         const hit = ATTACK[getRandom(3) - 1];
         const defence = ATTACK[getRandom(3) - 1];
-        console.log('####: hit', hit);
-        console.log('####: defence', defence);
+        // console.log('####: hit', hit);
+        // console.log('####: defence', defence);
 
         return {
             value: getRandom(HIT[hit]),
