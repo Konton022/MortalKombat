@@ -1,6 +1,6 @@
 import { player1, player2 } from '../Player/index.js';
-import { createElem, createPlayer, getRandom, getTime } from './Utils/index.js';
-import { $arenas, $button, $formFight, $chat, HIT, ATTACK, logs } from './init.js';
+import { createElem, createPlayer, getRandom, getTime } from '../Utils/index.js';
+import { $arenas, $button, $formFight, $chat, HIT, ATTACK, logs } from '../init.js';
 
 console.log('####currentTime is', getTime());
 
