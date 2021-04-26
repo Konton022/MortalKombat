@@ -8,7 +8,7 @@ class Player {
         this.img = props.img;
         this.weapon = [props.weapon];
         this.selector = `player${this.player}`;
-        this.rootSelector = props.rootSelector;
+        this.rootSelector = props.rootSelector = 'arenas';
     }
     attack = () => console.log(`${this.name} fight.....`);
     changeHP = (randomVar) => {
@@ -52,10 +52,11 @@ class Player {
 
 export const player1 = new Player({
     player: 1,
-    name: 'Scorpion', hp: 100,
+    name: 'Scorpion',
+    hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: 'knife',
-    rootSelector: 'arenas'
+    // rootSelector: 'arenas'
 })
 
 export const player2 = new Player({
@@ -64,7 +65,7 @@ export const player2 = new Player({
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
     weapon: ['ice sword'],
-    rootSelector: 'arenas'
+    // rootSelector: 'arenas'
 })
 
 
