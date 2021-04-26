@@ -1,14 +1,19 @@
-import { player1, player2 } from '../Player/index.js';
 import { createElem, createPlayer, getRandom, getTime } from '../Utils/index.js';
-import { $arenas, $button, $formFight, $chat, HIT, ATTACK, logs } from '../init.js';
-
-console.log('####currentTime is', getTime());
+import { HIT, ATTACK, logs } from '../init.js';
 
 class Game {
+    constructor(props) {
+        this.player1 = props.player1;
+        this.player2 = props.player2;
+        this.location = props.location;
+        this.button = props.button;
+        this.form = props.form;
+        this.chat = props.chat;
+    }
     start() {
-        $arenas.appendChild(createPlayer(player1))
-        $arenas.appendChild(createPlayer(player2))
-        this.generateLogs('start', player1, player2);
+        this.location.appendChild(createPlayer(this.player1))
+        this.location.appendChild(createPlayer(this.player2))
+        this.generateLogs('start', this.player1, this.player2);
 
 
     };
@@ -20,7 +25,7 @@ class Game {
             window.location.reload();
         })
         $reloadButtonDiv.appendChild($reloadButton);
-        $arenas.appendChild($reloadButtonDiv);
+        this.location.appendChild($reloadButtonDiv);
 
     }
     generateLogs(type, player1, player2, attackObj) {
@@ -53,7 +58,7 @@ class Game {
                 logString = `Ну а на часах ${getTime()}, а у нас что-то пошло не так!!`;
                 break
         }
-        $chat.insertAdjacentHTML('afterbegin', `<p>${logString}</p>`);
+        this.chat.insertAdjacentHTML('afterbegin', `<p>${logString}</p>`);
         return logString;
 
     }
@@ -70,7 +75,7 @@ class Game {
     }
     myAttack() {
         const attack = {};
-        for (let item of $formFight) {
+        for (let item of this.form) {
             if (item.checked && item.name === 'hit') {
                 attack.value = getRandom(HIT[item.value]);
                 attack.hit = item.value;
@@ -106,49 +111,22 @@ class Game {
             console.log(this.generateLogs('defence', player1, player2));
         }
     }
-    // generateLogs(type, player1, player2, attackObj) {
-    //     const date = new Date();
-    //     // let currentTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-    //     let logString = '';
-    //     switch (type) {
-    //         case 'start':
-    //             logString = logs.start.replace('[time]', `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`).replace('[player1]', player1.name).replace('[player2]', player2.name)
-    //             break;
-    //         case 'end':
-    //             logString = logs.end[getRandom(logs.end.length - 1)].replace('[playerWins]', player1.name).replace('[playerLose]', player2.name);
-    //             break;
-    //         case 'draw':
-    //             logString = logs.draw;
-    //             break;
-    //         case 'hit':
-    //             logString = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} - ${logs.hit[getRandom(logs.hit.length - 1)].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name)} - ${attackObj.value} [${player2.hp}/100]`;
-    //             break;
-    //         case 'defence':
-    //             logString = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} - ${logs.defence[getRandom(logs.defence.length - 1)].replace('[playerDefence]', player1.name).replace('[playerKick]', player2.name)}`;
-    //             break;
-    //         default:
-    //             logString = `Ну а на часах ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}, а у нас что-то пошло не так!!`;
-    //             break
-    //     }
-    //     $chat.insertAdjacentHTML('afterbegin', `<p>${logString}</p>`);
-    //     return logString;
 
-    // }
     winPlayer(player1, player2) {
         if (player1.hp === 0 || player2.hp === 0) {
-            $button.disabled = true;
+            this.button.disabled = true;
             this.createRealoadButton();
         }
         if (player1.hp === 0 && player1.hp < player2.hp) {
-            $arenas.appendChild(this.playerWins(player2.name));
+            this.location.appendChild(this.playerWins(player2.name));
             console.log(this.generateLogs('end', player2, player1));
         }
         else if (player2.hp === 0 && player2.hp < player1.hp) {
-            $arenas.appendChild(this.playerWins(player1.name));
+            this.location.appendChild(this.playerWins(player1.name));
             console.log(this.generateLogs('end', player1, player2));
         }
         else if (player1.hp === 0 && player2.hp === 0) {
-            $arenas.appendChild(this.playerWins())
+            this.location.appendChild(this.playerWins())
             console.log(this.generateLogs('draw'));
         }
     }
