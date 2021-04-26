@@ -28,11 +28,11 @@ const createPlayer = (playerObj) => {
 
 const getRandom = (numb) => Math.ceil(Math.random() * numb);
 
-const getTime1 = () => {
+const getTime = () => {
 
     const date = new Date()
 
-    function getTen(time) {
+    const getTen = (time) => {
         let tempStr = '';
         if (time < 10) {
             tempStr = `0${time}`;
@@ -51,5 +51,4 @@ const getTime1 = () => {
 
 }
 
-
-export { createElem, createPlayer, getRandom, getTime1 };
+export { createElem, createPlayer, getRandom, getTime };
