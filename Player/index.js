@@ -8,7 +8,7 @@ class Player {
         this.img = props.img;
         this.weapon = [props.weapon];
         this.selector = `player${this.player}`;
-        this.rootSelector = props.rootSelector = 'arenas';
+        this.rootSelector = props.rootSelector;
     }
     attack = () => console.log(`${this.name} fight.....`);
 
@@ -51,13 +51,20 @@ class Player {
     }
 }
 
-const getPlayers = async () => {
+const getMyPlayer = async () => {
     const body = fetch('https://reactmarathon-api.herokuapp.com/api/mk/players').then(res => res.json());
     return body;
 }
-const p1 = await getPlayers();
+const p1 = await getMyPlayer();
 const playerOne = p1[getRandom(p1.length - 1)]
-console.log('### playerOne is ', playerOne);
+// console.log('### my player is', playerOne);
+
+const getEnemyPlayer = async () => {
+    const body = fetch('https://reactmarathon-api.herokuapp.com/api/mk/player/choose').then(res => res.json());
+    return body;
+}
+const playerTwo = await getEnemyPlayer();
+// console.log('### enemy player is', playerTwo);
 
 export const player1 = new Player({
     ...playerOne,
@@ -66,16 +73,17 @@ export const player1 = new Player({
     // hp: 100,
     // img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: 'knife',
-    // rootSelector: 'arenas'
+    rootSelector: 'arenas'
 })
 
 export const player2 = new Player({
+    ...playerTwo,
     player: 2,
-    name: 'Sub-zero',
-    hp: 100,
-    img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
+    // name: 'Sub-zero',
+    // hp: 100,
+    // img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
     weapon: ['ice sword'],
-    // rootSelector: 'arenas'
+    rootSelector: 'arenas'
 })
 
 

@@ -101,6 +101,20 @@ class Game {
         }
     }
 
+    getAttack = async (argHit, argDefence) => {
+        const body = fetch('http://reactmarathon-api.herokuapp.com/api/mk/player/fight', {
+            method: 'POST',
+            body: JSON.stringify({
+                hit: argHit,
+                defence: argDefence,
+            })
+        });
+        const temp = await body.then(res => res.json())
+
+        // console.log('### temp is ', temp);
+        return temp;
+    }
+
     showResult(player1, player2, attack, enemy) {
         if (attack.hit != enemy.defence) {
             player1.changeHP(attack.value);
