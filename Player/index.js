@@ -1,4 +1,4 @@
-import { createElem } from "../utils/index.js";
+import { createElem, getRandom } from "../utils/index.js";
 
 class Player {
     constructor(props) {
@@ -11,6 +11,7 @@ class Player {
         this.rootSelector = props.rootSelector = 'arenas';
     }
     attack = () => console.log(`${this.name} fight.....`);
+
     changeHP = (randomVar) => {
         this.hp -= randomVar;
         if (this.hp <= 0) {
@@ -50,11 +51,20 @@ class Player {
     }
 }
 
+const getPlayers = async () => {
+    const body = fetch('https://reactmarathon-api.herokuapp.com/api/mk/players').then(res => res.json());
+    return body;
+}
+const p1 = await getPlayers();
+const playerOne = p1[getRandom(p1.length - 1)]
+console.log('### playerOne is ', playerOne);
+
 export const player1 = new Player({
+    ...playerOne,
     player: 1,
-    name: 'Scorpion',
-    hp: 100,
-    img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
+    // name: 'Scorpion',
+    // hp: 100,
+    // img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: 'knife',
     // rootSelector: 'arenas'
 })
@@ -69,4 +79,4 @@ export const player2 = new Player({
 })
 
 
-console.log(player1, player2);
+// console.log(player1, player2);

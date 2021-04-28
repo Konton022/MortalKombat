@@ -13,8 +13,6 @@ class Game {
     start() {
         this.player1.createPlayer();
         this.player2.createPlayer();
-        // this.location.appendChild(createPlayer(this.player1))
-        // this.location.appendChild(createPlayer(this.player2))
         this.generateLogs('start', this.player1, this.player2);
 
 
@@ -134,4 +132,7 @@ class Game {
     }
 }
 export default Game;
+
+
+
 
