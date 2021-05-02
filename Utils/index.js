@@ -31,4 +31,19 @@ const getTime = () => {
 
 }
 
-export { createElem, getRandom, getTime };
+const getMyPlayer = async () => {
+    const body = await fetch('https://reactmarathon-api.herokuapp.com/api/mk/players').then(res => res.json());
+    // return body;
+    const playerOne = body[getRandom(body.length - 1)]
+    return playerOne
+}
+
+const getEnemyPlayer = async () => {
+    const body = await fetch('https://reactmarathon-api.herokuapp.com/api/mk/player/choose').then(res => res.json());
+    return body;
+}
+// const p1 = await getMyPlayer();
+// const playerOne = p1[getRandom(p1.length - 1)]
+// console.log('### my player is', playerOne);
+
+export { createElem, getRandom, getTime, getMyPlayer, getEnemyPlayer };
