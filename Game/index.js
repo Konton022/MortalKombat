@@ -1,5 +1,6 @@
 import { createElem, getRandom, getTime } from '../utils/index.js';
 import { HIT, ATTACK, logs } from '../constants/index.js';
+import { $formFight } from '../init.js';
 
 class Game {
     constructor(props) {
@@ -102,17 +103,15 @@ class Game {
     }
 
     getAttack = async (argHit, argDefence) => {
-        const body = fetch('http://reactmarathon-api.herokuapp.com/api/mk/player/fight', {
+        const body = await fetch('http://reactmarathon-api.herokuapp.com/api/mk/player/fight', {
             method: 'POST',
             body: JSON.stringify({
                 hit: argHit,
                 defence: argDefence,
             })
-        });
-        const temp = await body.then(res => res.json())
 
-        // console.log('### temp is ', temp);
-        return temp;
+        }).then(res => res.json());
+        return body
     }
 
     showResult(player1, player2, attack, enemy) {

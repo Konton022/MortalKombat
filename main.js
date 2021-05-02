@@ -28,15 +28,36 @@ game.start();
 
 $formFight.addEventListener('submit', function (event) {
     event.preventDefault();
+
+    const getAttackData = () => {
+        const myAttack = {};
+        for (let item of $formFight) {
+            if (item.checked && item.name === 'hit') {
+                myAttack.hit = item.value;
+            }
+            if (item.checked && item.name === 'defence') {
+                myAttack.defence = item.value;
+            }
+            // item.checked = false;
+        }
+
+        const attackData = game.getAttack(myAttack.hit, myAttack.defence);
+        return attackData;
+    }
+    // console.log(getAttackData());
+    const attackData = getAttackData();
+    console.log('### attackData: ', attackData);
+
+
     const enemy = game.enemyAttack();
     const attack = game.myAttack();
     // const attackPlayer1 = game.myAttack();
     // const gameAttack = await game.getAttack(attackPlayer1.hit, attackPlayer1.defence);
     // const enemy = gameAttack.player2;
-    // console.log('#### enemy :', enemy);
+    console.log('#### enemy :', enemy);
 
     // const attack = gameAttack.player1;
-    // console.log('#### attack :', attack);
+    console.log('#### attack :', attack);
     game.showResult(player2, player1, attack, enemy);
     game.showResult(player1, player2, enemy, attack);
     game.winPlayer(player1, player2);
