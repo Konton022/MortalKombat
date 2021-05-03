@@ -38,7 +38,7 @@ $formFight.addEventListener('submit', async function (event) {
             if (item.checked && item.name === 'defence') {
                 myAttack.defence = item.value;
             }
-            // item.checked = false;
+            item.checked = false;
         }
         console.log('@@@ myAttack: ', myAttack);
         return myAttack;
