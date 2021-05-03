@@ -1,4 +1,4 @@
-import { createElem, getRandom, getMyPlayer, getEnemyPlayer } from "../utils/index.js";
+import { createElem, getRandom, getMyPlayer, getEnemyPlayer, } from "../utils/index.js";
 
 class Player {
     constructor(props) {
@@ -59,7 +59,10 @@ class Player {
 // }
 const playerOne = await getMyPlayer();
 const playerTwo = await getEnemyPlayer();
+
 // console.log('### enemy player is', playerTwo);
+// console.log('### playerOne: ', playerOne);
+// console.log('### playerTwo: ', playerTwo);
 
 
 

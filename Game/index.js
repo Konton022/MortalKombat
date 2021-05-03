@@ -102,17 +102,22 @@ class Game {
         }
     }
 
-    getAttack = async (argHit, argDefence) => {
-        const body = await fetch('http://reactmarathon-api.herokuapp.com/api/mk/player/fight', {
-            method: 'POST',
-            body: JSON.stringify({
-                hit: argHit,
-                defence: argDefence,
-            })
+    // getAttack = async (argHit, argDefence) => {
+    //     let getResults;
+    //     const body = await fetch('http://reactmarathon-api.herokuapp.com/api/mk/player/fight', {
+    //         method: 'POST',
+    //         body: JSON.stringify({
+    //             hit: argHit,
+    //             defence: argDefence,
+    //         })
 
-        }).then(res => res.json());
-        return body
-    }
+    //     }).then(res => {
+    //         console.log('### res:  ', res);
+    //         return res.json()
+    //     }).then(data => getResults = data);
+    //     console.log('### getResults: ', getResults);
+    //     return getResults;
+    // }
 
     showResult(player1, player2, attack, enemy) {
         if (attack.hit != enemy.defence) {
