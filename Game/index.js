@@ -1,5 +1,6 @@
 import { createElem, getRandom, getTime } from '../utils/index.js';
 import { HIT, ATTACK, logs } from '../constants/index.js';
+import { $formFight } from '../init.js';
 
 class Game {
     constructor(props) {
@@ -13,8 +14,6 @@ class Game {
     start() {
         this.player1.createPlayer();
         this.player2.createPlayer();
-        // this.location.appendChild(createPlayer(this.player1))
-        // this.location.appendChild(createPlayer(this.player2))
         this.generateLogs('start', this.player1, this.player2);
 
 
@@ -103,6 +102,23 @@ class Game {
         }
     }
 
+    // getAttack = async (argHit, argDefence) => {
+    //     let getResults;
+    //     const body = await fetch('http://reactmarathon-api.herokuapp.com/api/mk/player/fight', {
+    //         method: 'POST',
+    //         body: JSON.stringify({
+    //             hit: argHit,
+    //             defence: argDefence,
+    //         })
+
+    //     }).then(res => {
+    //         console.log('### res:  ', res);
+    //         return res.json()
+    //     }).then(data => getResults = data);
+    //     console.log('### getResults: ', getResults);
+    //     return getResults;
+    // }
+
     showResult(player1, player2, attack, enemy) {
         if (attack.hit != enemy.defence) {
             player1.changeHP(attack.value);
@@ -134,4 +150,7 @@ class Game {
     }
 }
 export default Game;
+
+
+
 
